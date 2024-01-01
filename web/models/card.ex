@@ -34,6 +34,11 @@ defmodule PhoenixJiraBoard.Card do
     |> calculate_position()
   end
 
+  def update_changeset(model, params \\ :empty) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
+  end
+
   defp calculate_position(changeset) do
     model = changeset.model
 
