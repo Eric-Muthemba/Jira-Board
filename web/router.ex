@@ -29,6 +29,6 @@ defmodule PhoenixJiraBoard.Router do
   scope "/", PhoenixJiraBoard do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "*path", PageController, :index
   end
 end
