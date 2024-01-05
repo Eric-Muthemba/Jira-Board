@@ -1,4 +1,3 @@
-
 defmodule PhoenixJiraBoard.SessionView do
   use PhoenixJiraBoard.Web, :view
 
