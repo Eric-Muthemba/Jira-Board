@@ -26,7 +26,7 @@ defmodule PhoenixJiraBoard.SessionController do
     Guardian.revoke!(jwt, claims)
 
     conn
-    |> render "delete.json"
+    |> render("delete.json")
   end
 
   def unauthenticated(conn, _params) do
