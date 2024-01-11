@@ -8,10 +8,11 @@ defmodule PhoenixJiraBoard.Card do
   alias PhoenixJiraBoard.List
   alias PhoenixJiraBoard.Card
 
-  @derive {Poison.Encoder, only: [:id, :list_id, :name, :position]}
+  @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position]}
 
   schema "cards" do
     field :name, :string
+    field :description, :string
     field :position, :integer
 
     belongs_to :list, List
@@ -20,7 +21,7 @@ defmodule PhoenixJiraBoard.Card do
   end
 
   @required_fields ~w(name list_id)
-  @optional_fields ~w(position)
+  @optional_fields ~w(description position)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
