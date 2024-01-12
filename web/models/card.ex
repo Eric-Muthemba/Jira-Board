@@ -7,8 +7,9 @@ defmodule PhoenixJiraBoard.Card do
   alias PhoenixJiraBoard.Repo
   alias PhoenixJiraBoard.List
   alias PhoenixJiraBoard.Card
+  alias PhoenixJiraBoard.Comment
 
-  @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position]}
+  @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position, :comments]}
 
   schema "cards" do
     field :name, :string
@@ -16,6 +17,7 @@ defmodule PhoenixJiraBoard.Card do
     field :position, :integer
 
     belongs_to :list, List
+    has_many :comments, Comment
 
     timestamps
   end
