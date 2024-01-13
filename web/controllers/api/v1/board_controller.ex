@@ -4,8 +4,7 @@ defmodule PhoenixJiraBoard.BoardController do
   plug Guardian.Plug.EnsureAuthenticated, handler: PhoenixJiraBoard.SessionController
   plug :scrub_params, "board" when action in [:create]
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.Board
+  alias PhoenixJiraBoard.{Repo, Board}
 
   def index(conn, _params) do
     current_user = Guardian.Plug.current_resource(conn)

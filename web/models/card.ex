@@ -1,10 +1,7 @@
 defmodule PhoenixJiraBoard.Card do
   use PhoenixJiraBoard.Web, :model
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.List
-  alias PhoenixJiraBoard.Card
-  alias PhoenixJiraBoard.Comment
+  alias PhoenixJiraBoard.{Repo, List, Card, Comment}
 
   @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position, :comments]}
 

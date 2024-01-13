@@ -1,9 +1,7 @@
 defmodule PhoenixJiraBoard.UserSocket do
   use Phoenix.Socket
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.User
-
+  alias PhoenixJiraBoard.{Repo, User}
 
   # Channels
   channel "boards:*", PhoenixJiraBoard.BoardChannel
@@ -23,7 +21,7 @@ defmodule PhoenixJiraBoard.UserSocket do
         :error
     end
   end
-  
+
   def connect(_params, _socket), do: :error
 
   def id(socket), do: "users_socket:#{socket.assigns.current_user.id}"
