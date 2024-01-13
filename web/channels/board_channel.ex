@@ -1,15 +1,11 @@
 defmodule PhoenixJiraBoard.BoardChannel do
-  require Logger
+  @moduledoc """
+  Board channel
+  """
 
   use PhoenixJiraBoard.Web, :channel
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.User
-  alias PhoenixJiraBoard.Board
-  alias PhoenixJiraBoard.UserBoard
-  alias PhoenixJiraBoard.List
-  alias PhoenixJiraBoard.Card
-  alias PhoenixJiraBoard.Comment
+  alias PhoenixJiraBoard.{User, Board, UserBoard, List, Card, Comment}
   alias PhoenixJiraBoard.BoardChannel.Monitor
 
   def join("boards:" <> board_id, _params, socket) do
@@ -31,7 +27,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
 
     changeset =
       board
-      |> build(:lists)
+      |> build_assoc(:lists)
       |> List.changeset(list_params)
 
     case Repo.insert(changeset) do
@@ -53,7 +49,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
 
     changeset =
       list
-      |> build(:cards)
+      |> build_assoc(:cards)
       |> Card.changeset(card_params)
 
     case Repo.insert(changeset) do
@@ -73,11 +69,12 @@ defmodule PhoenixJiraBoard.BoardChannel do
   def handle_in("members:add", %{"email" => email}, socket) do
     try do
       board = socket.assigns.board
-      user = User.by_email(email)
+      user = User
+        |> User.by_email(email)
         |> Repo.one
 
       changeset = user
-      |> build(:user_boards)
+      |> build_assoc(:user_boards)
       |> UserBoard.changeset(%{board_id: board.id})
 
       case Repo.insert(changeset) do
@@ -132,7 +129,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
     comment = socket.assigns.board
       |> assoc(:cards)
       |> Repo.get!(card_id)
-      |> build(:comments)
+      |> build_assoc(:comments)
 
     changeset = Comment.changeset(comment, %{text: text, user_id: current_user.id})
 
@@ -161,7 +158,8 @@ defmodule PhoenixJiraBoard.BoardChannel do
     cards_query = from c in Card, order_by: c.position, preload: [comments: ^comments_query]
     lists_query = from l in List, order_by: l.position, preload: [cards: ^cards_query]
 
-    Board.for_user(current_user.id)
+    Board
+      |> Board.for_user(current_user.id)
       |> Repo.get(board_id)
       |> Repo.preload([:user, :invited_users, lists: lists_query])
   end
