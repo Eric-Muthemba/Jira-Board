@@ -3,13 +3,13 @@ defmodule PhoenixJiraBoard.CardController do
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhoenixJiraBoard.SessionController
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.Board
+  alias PhoenixJiraBoard.{Repo, Board}
 
   def show(conn, %{"board_id" => board_id, "id" => id}) do
     current_user = Guardian.Plug.current_resource(conn)
 
-    card = Board.for_user(current_user.id)
+    card = Board
+      |> Board.for_user(current_user.id)
       |> Repo.get(board_id)
       |> assoc(:cards)
       |> Repo.get!(id)

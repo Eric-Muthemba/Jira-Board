@@ -1,8 +1,7 @@
 defmodule PhoenixJiraBoard.RegistrationController  do
   use PhoenixJiraBoard.Web, :controller
 
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.User
+  alias PhoenixJiraBoard.{Repo, User}
 
   plug :scrub_params, "user" when action in [:create]
 

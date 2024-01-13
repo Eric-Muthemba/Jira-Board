@@ -1,13 +1,7 @@
 defmodule PhoenixJiraBoard.List do
-  use Ecto.Schema
+  use PhoenixJiraBoard.Web, :model
 
-  import Ecto.Changeset
-  import Ecto.Query, only: [from: 2]
-
-  alias PhoenixJiraBoard.Board
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.List
-  alias PhoenixJiraBoard.Card
+  alias PhoenixJiraBoard.{Board, Repo, List, Card}
 
   @derive {Poison.Encoder, only: [:id, :board_id, :name, :position, :cards]}
 
@@ -41,8 +35,8 @@ defmodule PhoenixJiraBoard.List do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  defp calculate_position(changeset) do
-    model = changeset.model
+  defp calculate_position(current_changeset) do
+    model = current_changeset.model
 
     query = from(l in List,
             select: l.position,
@@ -51,8 +45,8 @@ defmodule PhoenixJiraBoard.List do
             limit: 1)
 
     case Repo.one(query) do
-      nil      -> put_change(changeset, :position, 1024)
-      position -> put_change(changeset, :position, position + 1024)
+      nil      -> put_change(current_changeset, :position, 1024)
+      position -> put_change(current_changeset, :position, position + 1024)
     end
   end
 end

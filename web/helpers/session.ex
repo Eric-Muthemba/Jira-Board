@@ -1,6 +1,5 @@
 defmodule PhoenixJiraBoard.Session do
-  alias PhoenixJiraBoard.Repo
-  alias PhoenixJiraBoard.User
+  alias PhoenixJiraBoard.{Repo, User}
 
   def authenticate(%{"email" => email, "password" => password}) do
     user = Repo.get_by(User, email: String.downcase(email))
