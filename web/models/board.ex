@@ -49,6 +49,10 @@ defmodule PhoenixJiraBoard.Board do
     from b in query, preload: [:user, :invited_users, lists: ^lists_query]
   end
 
+  def slug_id(board) do
+    "#{board.id}-#{board.slug}"
+  end
+
   defp slugify_name(current_changeset) do
     if name = get_change(current_changeset, :name) do
       put_change(current_changeset, :slug, slugify(name))
@@ -74,7 +78,7 @@ defimpl Poison.Encoder, for: PhoenixJiraBoard.Board do
   def encode(model, options) do
     model
     |> Map.take([:name, :lists, :user, :invited_users])
-    |> Map.put(:id, "#{model.id}-#{model.slug}")
+    |> Map.put(:id, PhoenixJiraBoard.Board.slug_id(model))
     |> Poison.Encoder.encode(options)
   end
 end
