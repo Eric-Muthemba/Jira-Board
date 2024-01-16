@@ -17,7 +17,8 @@ defmodule PhoenixJiraBoard.ModelCase do
   using do
     quote do
       alias PhoenixJiraBoard.Repo
-      import Ecto.Model
+      import Ecto, only: [build_assoc: 2]
+      import Ecto.Model, except: [build: 2]
       import Ecto.Query, only: [from: 2]
       import PhoenixJiraBoard.ModelCase
     end
