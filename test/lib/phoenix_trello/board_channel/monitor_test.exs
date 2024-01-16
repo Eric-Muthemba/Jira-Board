@@ -4,7 +4,6 @@ defmodule PhoenixJiraBoard.BoardChannel.MonitorTest do
   import PhoenixJiraBoard.Factory
 
   alias PhoenixJiraBoard.BoardChannel.Monitor
-  alias PhoenixJiraBoard.User
 
   setup_all do
     users = %{

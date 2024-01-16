@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.BoardTest do
-  use PhoenixJiraBoard.ModelCase
+  use PhoenixJiraBoard.ModelCase, async: true
 
   import PhoenixJiraBoard.Factory
 

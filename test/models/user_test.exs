@@ -1,9 +1,15 @@
 defmodule PhoenixJiraBoard.UserTest do
-  use PhoenixJiraBoard.ModelCase
+  use PhoenixJiraBoard.ModelCase, async: true
 
   alias PhoenixJiraBoard.User
 
-  @valid_attrs %{encrypted_password: "some content", email: "some content", first_name: "some content", last_name: "some content"}
+  @valid_attrs %{
+    encrypted_password: "some content",
+    email: "email@email.com",
+    first_name: "some content",
+    last_name: "some content",
+    password: "123456"
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -1,7 +1,7 @@
 defmodule PhoenixJiraBoard.Factory do
   use ExMachina.Ecto, repo: PhoenixJiraBoard.Repo
 
-  alias PhoenixJiraBoard.{User, Board, List}
+  alias PhoenixJiraBoard.{User, Board, List, Card}
 
   def factory(:user) do
     %User{
@@ -28,8 +28,22 @@ defmodule PhoenixJiraBoard.Factory do
   end
 
   def factory(:list) do
-    list = %List{
+    %List{
       name: sequence(:name, &"Name #{&1}")
+    }
+  end
+
+  def factory(:card) do
+    %Card{
+      name: sequence(:name, &"Name #{&1}")
+    }
+  end
+
+  def factory(:list_with_cards) do
+    %List{
+      name: sequence(:name, &"Name #{&1}"),
+      board: build(:board),
+      cards: build_list(5, :card)
     }
   end
 end
