@@ -21,10 +21,12 @@ defmodule PhoenixJiraBoard.ConnCase do
       use Phoenix.ConnTest
 
       alias PhoenixJiraBoard.Repo
-      import Ecto.Model
+      import Ecto.Model, except: [build: 2]
       import Ecto.Query, only: [from: 2]
 
       import PhoenixJiraBoard.Router.Helpers
+
+      import PhoenixJiraBoard.Factory
 
       # The default endpoint for testing
       @endpoint PhoenixJiraBoard.Endpoint
