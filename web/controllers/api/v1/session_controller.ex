@@ -32,7 +32,7 @@ defmodule PhoenixJiraBoard.SessionController do
 
   def unauthenticated(conn, _params) do
     conn
-    |> put_status(:unprocessable_entity)
-    |> render("error.json", error: "Not Authenticated")
+    |> put_status(:forbidden)
+    |> render(PhoenixJiraBoard.SessionView, "forbidden.json", error: "Not Authenticated")
   end
 end
