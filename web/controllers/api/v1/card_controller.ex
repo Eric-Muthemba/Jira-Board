@@ -12,7 +12,7 @@ defmodule PhoenixJiraBoard.CardController do
       |> Board.for_user(current_user.id)
       |> Repo.get(board_id)
       |> assoc(:cards)
-      |> Card.with_everything
+      |> Card.with_comments
       |> Repo.get!(id)
 
 
