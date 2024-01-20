@@ -14,7 +14,7 @@ defmodule PhoenixJiraBoard.RegistrationController  do
 
         conn
         |> put_status(:created)
-        |> render(jwt: jwt, user: user)
+        |> render(PhoenixJiraBoard.SessionView, "show.json", jwt: jwt, user: user)
 
       {:error, changeset} ->
         conn
