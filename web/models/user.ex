@@ -14,7 +14,7 @@ defmodule PhoenixJiraBoard.User do
 
     has_many :owned_boards, PhoenixJiraBoard.Board
     has_many :user_boards, PhoenixJiraBoard.UserBoard
-    has_many :invited_boards, through: [:user_boards, :board]
+    has_many :boards, through: [:user_boards, :board]
 
     timestamps
   end

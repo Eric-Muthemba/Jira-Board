@@ -15,7 +15,8 @@ defmodule PhoenixJiraBoard.BoardController do
       |> Repo.all
 
     invited_boards = current_user
-      |> assoc(:invited_boards)
+      |> assoc(:boards)
+      |> Board.not_owned_by(current_user.id)
       |> Board.with_everything
       |> Repo.all
 
