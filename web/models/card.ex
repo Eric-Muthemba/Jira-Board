@@ -1,9 +1,9 @@
 defmodule PhoenixJiraBoard.Card do
   use PhoenixJiraBoard.Web, :model
 
-  alias PhoenixJiraBoard.{Repo, List, Card, Comment}
+  alias PhoenixJiraBoard.{Repo, List, Card, Comment, CardMember}
 
-  @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position, :comments]}
+  @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position, :comments, :members]}
 
   schema "cards" do
     field :name, :string
@@ -12,6 +12,8 @@ defmodule PhoenixJiraBoard.Card do
 
     belongs_to :list, List
     has_many :comments, Comment
+    has_many :card_members, CardMember
+    has_many :members, through: [:card_members, :user]
 
     timestamps
   end
@@ -55,5 +57,9 @@ defmodule PhoenixJiraBoard.Card do
     comments_query = from c in Comment, order_by: [desc: c.inserted_at], preload: :user
 
     from c in query, preload: [comments: ^comments_query]
+  end
+
+  def with_members(query \\ %Card{}) do
+    from c in query, preload: [:members]
   end
 end

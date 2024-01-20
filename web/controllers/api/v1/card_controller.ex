@@ -13,6 +13,7 @@ defmodule PhoenixJiraBoard.CardController do
       |> Repo.get(board_id)
       |> assoc(:cards)
       |> Card.with_comments
+      |> Card.with_members
       |> Repo.get!(id)
 
 
