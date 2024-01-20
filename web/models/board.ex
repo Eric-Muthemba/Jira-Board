@@ -1,8 +1,9 @@
 defmodule PhoenixJiraBoard.Board do
   use PhoenixJiraBoard.Web, :model
+  use Ecto.Model.Callbacks
 
   alias __MODULE__
-  alias PhoenixJiraBoard.{Permalink, List, Comment, Card}
+  alias PhoenixJiraBoard.{Repo, Permalink, List, Comment, Card, UserBoard, User}
 
   @primary_key {:id, Permalink, autogenerate: true}
 
@@ -10,10 +11,10 @@ defmodule PhoenixJiraBoard.Board do
     field :name, :string
     field :slug, :string
 
-    belongs_to :user, PhoenixJiraBoard.User
-    has_many :lists, PhoenixJiraBoard.List
+    belongs_to :user, User
+    has_many :lists, List
     has_many :cards, through: [:lists, :cards]
-    has_many :user_boards, PhoenixJiraBoard.UserBoard
+    has_many :user_boards, UserBoard
     has_many :invited_users, through: [:user_boards, :user]
 
     timestamps
@@ -21,6 +22,8 @@ defmodule PhoenixJiraBoard.Board do
 
   @required_fields ~w(name user_id)
   @optional_fields ~w(slug)
+
+  after_insert Board, :insert_user_board
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -32,6 +35,17 @@ defmodule PhoenixJiraBoard.Board do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> slugify_name()
+  end
+
+  def insert_user_board(changeset) do
+    board_id = changeset.model.id
+    user_id = changeset.model.user_id
+
+    user_board_changeset = UserBoard.changeset(%UserBoard{}, %{"board_id": board_id, "user_id": user_id})
+
+    Repo.insert!(user_board_changeset)
+
+    changeset
   end
 
   def for_user(query \\ %Board{}, user_id) do
@@ -68,7 +82,7 @@ defmodule PhoenixJiraBoard.Board do
   end
 end
 
-defimpl Phoenix.Param, for: PhoenixJiraBoard.Board do
+defimpl Phoenix.Param, for: Board do
   def to_param(%{slug: slug, id: id}) do
     "#{id}-#{slug}"
   end
