@@ -4,6 +4,7 @@ defmodule PhoenixJiraBoard.Repo.Migrations.UpdateBoardsSlugs do
   alias PhoenixJiraBoard.{Repo, Board}
 
   def change do
+    
     # try do
     #   Repo.all(Board)
     #   |> Enum.each(fn board ->
