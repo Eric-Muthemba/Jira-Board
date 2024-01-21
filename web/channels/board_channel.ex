@@ -81,6 +81,9 @@ defmodule PhoenixJiraBoard.BoardChannel do
       case Repo.insert(changeset) do
         {:ok, _board_user} ->
           broadcast! socket, "member:added", %{user: user}
+
+          PhoenixJiraBoard.Endpoint.broadcast_from! self(), "users:#{user.id}", "projects:add", %{board: board}
+
           {:noreply, socket}
         {:error, _changeset} ->
           {:reply, {:error, %{error: "Error adding new member"}}, socket}
