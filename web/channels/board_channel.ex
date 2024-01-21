@@ -82,7 +82,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
         {:ok, _board_user} ->
           broadcast! socket, "member:added", %{user: user}
 
-          PhoenixJiraBoard.Endpoint.broadcast_from! self(), "users:#{user.id}","projects:add", %{board: board}
+          PhoenixJiraBoard.Endpoint.broadcast_from! self(), "users:#{user.id}", "projects:add", %{board: board}
 
           {:noreply, socket}
         {:error, _changeset} ->
