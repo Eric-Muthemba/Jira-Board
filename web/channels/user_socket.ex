@@ -5,6 +5,7 @@ defmodule PhoenixJiraBoard.UserSocket do
 
   # Channels
   channel "boards:*", PhoenixJiraBoard.BoardChannel
+  channel "users:*", PhoenixJiraBoard.UserChannel
 
   # Transports
   transport :websocket, Phoenix.Transports.WebSocket
