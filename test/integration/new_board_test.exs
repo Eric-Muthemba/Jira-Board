@@ -47,8 +47,7 @@ defmodule PhoenixJiraBoard.NewBoardTest do
 
     element_visible? {:css, ".view-container.boards.show"}
 
-    user = User
-      |> Repo.get!(user.id)
+    user = user
       |> Repo.preload(:boards)
 
     board = user.boards
