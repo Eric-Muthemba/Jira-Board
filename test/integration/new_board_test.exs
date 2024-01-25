@@ -12,7 +12,7 @@ defmodule PhoenixJiraBoard.NewBoardTest do
   end
 
   @tag :integration
-  test "GET / with exsiting user", %{user: user} do
+  test "GET / with existing user", %{user: user} do
     navigate_to "/"
 
     sign_in_form = find_element(:id, "sign_in_form")
