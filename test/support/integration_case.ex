@@ -8,6 +8,8 @@ defmodule PhoenixJiraBoard.IntegrationCase do
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
       import PhoenixJiraBoard.Router.Helpers
+      import PhoenixJiraBoard.Factory
+      import PhoenixJiraBoard.Retryer
 
       alias PhoenixJiraBoard.Repo
 
