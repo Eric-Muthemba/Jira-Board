@@ -5,6 +5,7 @@ defmodule PhoenixJiraBoard.IntegrationCase do
     quote do
       use Hound.Helpers
 
+      import Ecto, only: [build_assoc: 2]
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
       import PhoenixJiraBoard.Router.Helpers
