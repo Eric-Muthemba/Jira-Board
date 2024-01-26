@@ -1,7 +1,7 @@
 defmodule PhoenixJiraBoard.UserSocket do
   use Phoenix.Socket
 
-  alias PhoenixJiraBoard.{Repo, User}
+  alias PhoenixJiraBoard.{GuardianSerializer}
 
   # Channels
   channel "boards:*", PhoenixJiraBoard.BoardChannel
@@ -14,10 +14,12 @@ defmodule PhoenixJiraBoard.UserSocket do
   def connect(%{"token" => token}, socket) do
     case Guardian.decode_and_verify(token) do
       {:ok, claims} ->
-        user_id = claims["sub"] |> String.replace("User:", "") |> String.to_integer
-        user = Repo.get!(User, user_id)
-
-        {:ok, assign(socket, :current_user, user)}
+        case GuardianSerializer.from_token(claims["sub"]) do
+          {:ok, user} ->
+            {:ok, assign(socket, :current_user, user)}
+          {:error, _reason} ->
+            :error
+        end
       {:error, _reason} ->
         :error
     end
