@@ -2,6 +2,8 @@ defmodule PhoenixJiraBoard.IntegrationCase do
   use ExUnit.CaseTemplate
   use Hound.Helpers
 
+  import PhoenixJiraBoard.Retryer
+
   using do
     quote do
       use Hound.Helpers
@@ -47,5 +49,7 @@ defmodule PhoenixJiraBoard.IntegrationCase do
     sign_in_form
     |> find_within_element(:css, "button")
     |> click
+
+    assert element_visible?({:id, "authentication_container"})
   end
 end
