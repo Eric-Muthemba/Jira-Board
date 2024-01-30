@@ -1,6 +1,9 @@
 defmodule PhoenixJiraBoard.IntegrationCase do
   use ExUnit.CaseTemplate
   use Hound.Helpers
+  import PhoenixJiraBoard.Factory
+
+  alias PhoenixJiraBoard.{Repo, User}
 
   using do
     quote do
@@ -28,6 +31,12 @@ defmodule PhoenixJiraBoard.IntegrationCase do
     end
 
     :ok
+  end
+
+  def create_user do
+    build(:user)
+    |> User.changeset(%{password: "12345678"})
+    |> Repo.insert!
   end
 
   def user_sign_in(%{user: user}) do

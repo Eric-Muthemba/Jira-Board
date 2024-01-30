@@ -1,8 +1,6 @@
 defmodule PhoenixJiraBoard.SignInTest do
   use PhoenixJiraBoard.IntegrationCase
 
-  alias PhoenixJiraBoard.User
-
   @tag :integration
   test "GET /" do
     navigate_to "/"
@@ -40,11 +38,5 @@ defmodule PhoenixJiraBoard.SignInTest do
 
     assert page_source =~ "#{user.first_name} #{user.last_name}"
     assert page_source =~ "My boards"
-  end
-
-  def create_user do
-    build(:user)
-    |> User.changeset(%{password: "12345678"})
-    |> Repo.insert!
   end
 end
