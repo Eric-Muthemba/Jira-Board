@@ -2,8 +2,6 @@ defmodule PhoenixJiraBoard.IntegrationCase do
   use ExUnit.CaseTemplate
   use Hound.Helpers
 
-  import PhoenixJiraBoard.Retryer
-
   using do
     quote do
       use Hound.Helpers
@@ -13,7 +11,6 @@ defmodule PhoenixJiraBoard.IntegrationCase do
       import Ecto.Query, only: [from: 2]
       import PhoenixJiraBoard.Router.Helpers
       import PhoenixJiraBoard.Factory
-      import PhoenixJiraBoard.Retryer
       import PhoenixJiraBoard.IntegrationCase
 
       alias PhoenixJiraBoard.Repo
@@ -50,6 +47,6 @@ defmodule PhoenixJiraBoard.IntegrationCase do
     |> find_within_element(:css, "button")
     |> click
 
-    assert element_visible?({:id, "authentication_container"})
+    assert element_displayed?({:id, "authentication_container"})
   end
 end
