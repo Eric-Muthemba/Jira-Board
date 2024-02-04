@@ -2,10 +2,11 @@ defmodule PhoenixJiraBoard.UserBoard do
   use PhoenixJiraBoard.Web, :model
 
   alias __MODULE__
+  alias PhoenixJiraBoard.{User, Board}
 
   schema "user_boards" do
-    belongs_to :user, PhoenixJiraBoard.User
-    belongs_to :board, PhoenixJiraBoard.Board
+    belongs_to :user, User
+    belongs_to :board, Board
 
     timestamps
   end
@@ -26,6 +27,6 @@ defmodule PhoenixJiraBoard.UserBoard do
 
   def find_by_user_and_board(query \\ %UserBoard{}, user_id, board_id) do
     from u in query,
-    where: u.user_id == ^user_id and u.board_id == ^board_id 
+    where: u.user_id == ^user_id and u.board_id == ^board_id
   end
 end

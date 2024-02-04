@@ -1,7 +1,7 @@
 defmodule PhoenixJiraBoard.User do
   use PhoenixJiraBoard.Web, :model
 
-  alias __MODULE__
+  alias PhoenixJiraBoard.{Board, UserBoard}
 
   @derive {Poison.Encoder, only: [:id, :first_name, :last_name, :email]}
 
@@ -12,8 +12,8 @@ defmodule PhoenixJiraBoard.User do
     field :encrypted_password, :string
     field :password, :string, virtual: true
 
-    has_many :owned_boards, PhoenixJiraBoard.Board
-    has_many :user_boards, PhoenixJiraBoard.UserBoard
+    has_many :owned_boards, Board
+    has_many :user_boards, UserBoard
     has_many :boards, through: [:user_boards, :board]
 
     timestamps

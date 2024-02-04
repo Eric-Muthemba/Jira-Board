@@ -4,7 +4,6 @@ defmodule PhoenixJiraBoard.BoardChannel do
   """
 
   use PhoenixJiraBoard.Web, :channel
-  require Logger
 
   alias PhoenixJiraBoard.{User, Board, UserBoard, List, Card, Comment, CardMember}
   alias PhoenixJiraBoard.BoardChannel.Monitor
@@ -218,9 +217,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
   end
 
   defp get_current_board(socket, board_id) do
-    current_user = socket.assigns.current_user
-
-    current_user
+    socket.assigns.current_user
     |> assoc(:boards)
     |> Board.preload_all
     |> Repo.get(board_id)
