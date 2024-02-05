@@ -13,8 +13,7 @@ defmodule PhoenixJiraBoard do
       worker(PhoenixJiraBoard.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(PhoenixJiraBoard.Worker, [arg1, arg2, arg3]),
-      worker(PhoenixJiraBoard.BoardChannel.Monitor, [%{}]),
-
+      supervisor(PhoenixJiraBoard.BoardChannel.Supervisor, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
