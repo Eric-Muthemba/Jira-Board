@@ -3,7 +3,7 @@ defmodule PhoenixJiraBoard.IntegrationCase do
   use Hound.Helpers
   import PhoenixJiraBoard.Factory
 
-  alias PhoenixJiraBoard.{Repo, User}
+  alias PhoenixJiraBoard.{Repo, User, Board, UserBoard}
 
   using do
     quote do
@@ -37,6 +37,21 @@ defmodule PhoenixJiraBoard.IntegrationCase do
     build(:user)
     |> User.changeset(%{password: "12345678"})
     |> Repo.insert!
+  end
+
+  def create_board(user) do
+    board = user
+    |> Ecto.build_assoc(:owned_boards)
+    |> Board.changeset(%{name: "My new board"})
+    |> Repo.insert!
+
+    board
+    |> Ecto.build_assoc(:user_boards)
+    |> UserBoard.changeset(%{user_id: user.id})
+    |> Repo.insert!
+
+    board
+    |> Repo.preload([:user, :members, lists: :cards])
   end
 
   def user_sign_in(%{user: user}) do
