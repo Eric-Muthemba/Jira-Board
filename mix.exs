@@ -2,7 +2,7 @@ defmodule PhoenixJiraBoard.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenix_trello,
+    [app: :jira_board,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -10,7 +10,7 @@ defmodule PhoenixJiraBoard.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
-     deps: deps()]
+     deps: deps()()]
   end
 
   # Configuration for the OTP application.

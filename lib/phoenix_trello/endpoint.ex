@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenix_trello
+  use Phoenix.Endpoint, otp_app: :jira_board
 
   socket "/socket", PhoenixJiraBoard.UserSocket
 
@@ -8,7 +8,7 @@ defmodule PhoenixJiraBoard.Endpoint do
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :phoenix_trello, gzip: false,
+    at: "/", from: :jira_board, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -32,7 +32,7 @@ defmodule PhoenixJiraBoard.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_phoenix_trello_key",
+    key: "_jira_board_key",
     signing_salt: "utLqshqa"
 
   plug PhoenixJiraBoard.Router

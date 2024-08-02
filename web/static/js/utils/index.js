@@ -59,7 +59,7 @@ export function httpDelete(url) {
 }
 
 export function setDocumentTitle(title) {
-  document.title = `${title} | Phoenix Jira-Board`;
+  document.title = `${title} | Jira Board`;
 }
 
 export function renderErrorsFor(errors, ref) {

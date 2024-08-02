@@ -4,7 +4,7 @@ alias PhoenixJiraBoard.{Repo, User}
   %{
     first_name: "John",
     last_name: "Doe",
-    email: "john@phoenix-trello.com",
+    email: "john@phoenix-jiraboard.com",
     password: "12345678"
   },
 ]

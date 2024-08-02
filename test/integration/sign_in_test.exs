@@ -5,7 +5,7 @@ defmodule PhoenixJiraBoard.SignInTest do
   test "GET /" do
     navigate_to "/"
 
-    assert page_title == "Sign in | Phoenix Jira-Board"
+    assert page_title == "Sign in | Jira Board"
     assert element_displayed?({:id, "sign_in_form"})
   end
 

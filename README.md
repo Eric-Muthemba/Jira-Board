@@ -1,4 +1,4 @@
-# Phoenix Jira-Board
+# Jira Board
 [![Build Status](https://travis-ci.org/bigardone/phoenix-trello.svg?branch=master)](https://travis-ci.org/bigardone/phoenix-trello)
 
 
@@ -27,7 +27,7 @@ https://phoenix-trello.herokuapp.com
 You need to have **Elixir v1.3** and **PostgreSQL** installed.
 
 ## Installation instructions
-To start your Phoenix Jira-Board app:
+To start your Jira Board app:
 
   1. Install dependencies with `mix deps.get`
   2. Ensure webpack is installed. ie: `npm install -g webpack`

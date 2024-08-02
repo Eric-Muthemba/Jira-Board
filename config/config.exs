@@ -5,12 +5,12 @@
 # is restricted to this project.
 use Mix.Config
 
-config :phoenix_trello,
+config :jira_board,
   namespace: PhoenixJiraBoard,
   ecto_repos: [PhoenixJiraBoard.Repo]
 
 # Configures the endpoint
-config :phoenix_trello, PhoenixJiraBoard.Endpoint,
+config :jira_board, PhoenixJiraBoard.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "hWbd3QwLuaWKwJY5qYOKLGSBboxjnW46c4TzBAa+cMODz26RokgHQIJo6Nej3DGr",
