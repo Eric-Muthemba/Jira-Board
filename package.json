@@ -1,5 +1,5 @@
 {
-  "name": "phoenix_trello",
+  "name": "phoenix_jira_board",
   "version": "1.0.0",
   "description": "Jira-Board tribute done in Elexir and Phoenix.",
   "main": "index.js",

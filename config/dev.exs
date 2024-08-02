@@ -6,18 +6,18 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :jira_board, PhoenixJiraBoard.Endpoint,
+config :phoenix_jira_board, PhoenixJiraBoard.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
   watchers: [
-    node: ["node_modules/webpack/bin/webpack.js", "--watch", "--color", cd: Path.expand("../", __DIR__)]
+    node: ["node_modules/webpack/bin/webpack.js", "--watch", "--color"]
   ]
 
 # Watch static and templates for browser reloading.
-config :jira_board, PhoenixJiraBoard.Endpoint,
+config :phoenix_jira_board, PhoenixJiraBoard.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
@@ -35,11 +35,11 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :jira_board, PhoenixJiraBoard.Repo,
+config :phoenix_jira_board, PhoenixJiraBoard.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "jira_board_dev",
+  database: "phoenix_jira_board_dev",
   hostname: "localhost",
   pool_size: 10
 

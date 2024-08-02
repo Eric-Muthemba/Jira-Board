@@ -2,7 +2,7 @@ defmodule PhoenixJiraBoard.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :jira_board,
+    [app: :phoenix_jira_board,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -10,7 +10,7 @@ defmodule PhoenixJiraBoard.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
-     deps: deps()()]
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -20,7 +20,6 @@ defmodule PhoenixJiraBoard.Mixfile do
     [mod: {PhoenixJiraBoard, []},
      applications: [
       :phoenix,
-      :phoenix_pubsub,
       :phoenix_html,
       :cowboy,
       :logger,
@@ -40,19 +39,18 @@ defmodule PhoenixJiraBoard.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.2.1"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.0.1"},
+      {:phoenix, "~> 1.1"},
+      {:phoenix_ecto, "~> 2.0"},
       {:postgrex, ">= 0.0.0", override: true},
-      {:phoenix_html, "~> 2.6.2"},
+      {:phoenix_html, "~> 2.3"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:comeonin, "~> 2.5.3"},
-      {:guardian, "~> 0.13.0"},
-      {:credo, "~> 0.4.11", only: [:dev, :test]},
-      {:ex_machina, "~> 1.0.2"},
+      {:comeonin, "~> 2.0"},
+      {:guardian, "~> 0.9.0"},
+      {:credo, "~> 0.2", only: [:dev, :test]},
+      {:ex_machina, "~> 0.6.1"},
       {:exactor, "~> 2.2.0"},
-      {:hound, "~> 1.0.2"},
+      {:hound, "~> 0.8"},
       {:mix_test_watch, "~> 0.2", only: :dev}
      ]
   end
@@ -65,7 +63,6 @@ defmodule PhoenixJiraBoard.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"]]
   end
 end
