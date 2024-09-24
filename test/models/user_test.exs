@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.UserTest do
-  use PhoenixJiraBoard.ModelCase, async: true
+  use PhoenixJiraBoard.ModelCase
 
   alias PhoenixJiraBoard.User
 

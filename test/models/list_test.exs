@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.ListTest do
-  use PhoenixJiraBoard.ModelCase, async: true
+  use PhoenixJiraBoard.ModelCase
 
   import PhoenixJiraBoard.Factory
 
@@ -9,7 +9,7 @@ defmodule PhoenixJiraBoard.ListTest do
   @invalid_attrs %{}
 
   setup do
-    {:ok, board: create(:board)}
+    {:ok, board: insert(:board)}
   end
 
   test "changeset with valid attributes", %{board: board} do

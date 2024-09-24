@@ -9,9 +9,9 @@ defmodule PhoenixJiraBoard.BoardChannel.MonitorTest do
 
   setup_all do
     users = %{
-      first_user: create(:user),
-      second_user: create(:user),
-      third_user: create(:user)
+      first_user: insert(:user),
+      second_user: insert(:user),
+      third_user: insert(:user)
     }
 
     Monitor.create(@board_id)

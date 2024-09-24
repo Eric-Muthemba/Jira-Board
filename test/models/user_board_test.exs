@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.UserBoardTest do
-  use PhoenixJiraBoard.ModelCase, async: true
+  use PhoenixJiraBoard.ModelCase
 
   import PhoenixJiraBoard.Factory
 
@@ -9,8 +9,8 @@ defmodule PhoenixJiraBoard.UserBoardTest do
   @invalid_attrs %{}
 
   setup do
-    user = create(:user)
-    board = create(:board)
+    user = insert(:user)
+    board = insert(:board)
 
     {:ok, user: user, board: board}
   end
