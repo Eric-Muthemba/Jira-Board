@@ -1,5 +1,5 @@
 defmodule PhoenixJiraBoard.ErrorViewTest do
-  use PhoenixJiraBoard.ConnCase, async: true
+  use PhoenixJiraBoard.ConnCase
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View

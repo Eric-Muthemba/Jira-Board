@@ -5,6 +5,10 @@
 # is restricted to this project.
 use Mix.Config
 
+config :phoenix_trello,
+  namespace: PhoenixJiraBoard,
+  ecto_repos: [PhoenixJiraBoard.Repo]
+
 # Configures the endpoint
 config :phoenix_trello, PhoenixJiraBoard.Endpoint,
   url: [host: "localhost"],

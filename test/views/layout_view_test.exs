@@ -1,3 +1,3 @@
 defmodule PhoenixJiraBoard.LayoutViewTest do
-  use PhoenixJiraBoard.ConnCase, async: true
+  use PhoenixJiraBoard.ConnCase
 end
