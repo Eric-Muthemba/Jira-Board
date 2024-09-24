@@ -1,17 +1,15 @@
 defmodule PhoenixJiraBoard.BoardChannel.MonitorTest do
   use ExUnit.Case, async: true
 
-  import PhoenixJiraBoard.Factory
-
-  alias PhoenixJiraBoard.BoardChannel.Monitor
+  alias PhoenixJiraBoard.{BoardChannel.Monitor, User}
 
   @board_id "1-board"
 
   setup_all do
     users = %{
-      first_user: insert(:user),
-      second_user: insert(:user),
-      third_user: insert(:user)
+      first_user: %User{id: 1},
+      second_user: %User{id: 2},
+      third_user: %User{id: 3}
     }
 
     Monitor.create(@board_id)
