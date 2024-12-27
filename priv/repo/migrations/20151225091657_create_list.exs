@@ -11,6 +11,5 @@ defmodule PhoenixJiraBoard.Repo.Migrations.CreateList do
     end
 
     create index(:lists, [:board_id])
-    create index(:lists, [:id, :position], unique: true)
   end
 end
