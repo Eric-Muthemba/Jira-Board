@@ -7,16 +7,16 @@ defmodule PhoenixJiraBoard.List do
   alias PhoenixJiraBoard.Board
   alias PhoenixJiraBoard.Repo
   alias PhoenixJiraBoard.List
+  alias PhoenixJiraBoard.Card
 
-  require IEx
-
-  @derive {Poison.Encoder, only: [:id, :name]}
+  @derive {Poison.Encoder, only: [:id, :name, :cards]}
 
   schema "lists" do
     field :name, :string
     field :position, :integer
 
     belongs_to :board, Board
+    has_many :cards, Card
 
     timestamps
   end
