@@ -4,6 +4,7 @@ defmodule PhoenixJiraBoard.BoardChannel do
   use PhoenixJiraBoard.Web, :channel
 
   alias PhoenixJiraBoard.Repo
+  alias PhoenixJiraBoard.Board
   alias PhoenixJiraBoard.List
   alias PhoenixJiraBoard.Card
   alias PhoenixJiraBoard.BoardChannel.Monitor
@@ -14,10 +15,9 @@ defmodule PhoenixJiraBoard.BoardChannel do
     cards_query = from c in Card, order_by: c.position
     lists_query = from l in List, order_by: l.position, preload: [cards: ^cards_query]
 
-    board =
-      assoc(current_user, :owned_boards)
-      |> Repo.get!(board_id)
-      |> Repo.preload([lists: lists_query])
+    board = Board.for_user(current_user.id)
+      |> Repo.get(board_id)
+      |> Repo.preload([:user, :invited_users, lists: lists_query])
 
     send(self, {:after_join, Monitor.user_joined(board_id, current_user)[board_id]})
 
