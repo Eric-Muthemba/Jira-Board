@@ -12,6 +12,7 @@ defmodule PhoenixJiraBoard.Board do
 
     belongs_to :user, PhoenixJiraBoard.User
     has_many :lists, PhoenixJiraBoard.List
+    has_many :cards, through: [:lists, :cards]
     has_many :user_boards, PhoenixJiraBoard.UserBoard
     has_many :invited_users, through: [:user_boards, :user]
 
